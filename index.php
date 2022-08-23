@@ -1,10 +1,23 @@
 <?php
-	// load system
-	include('plugins.class.php');
-	// start system
-	plugins::start('plugins/');
-	// call first hook
-	plugins::call('helloWorld');
-	// second hook
-	$test = 'Lorem Ipsum Dolor';
-	plugins::call('foo', array($test));
+
+// load system
+
+set_include_path('/');
+include 'plugins.class.php';
+// start system
+plugins::start('plugins/');
+include 'config.php';
+include 'common.php';
+include 'logging.php';
+// call first hook
+$path = $folder.getTitleFromName($_REQUEST['filename']).'/'; // get the folder path
+
+$ext = strtolower(pathinfo($path.$_REQUEST['filename'], PATHINFO_EXTENSION)); // get the extension of the file
+
+// Only image and video
+if (in_array($ext, ['jpg', 'jpeg', 'png', 'bmp', 'gif', 'mp4', 'avi', 'mpg', 'mpeg'])) {
+    plugins::call('execute', [file_get_contents('php://input')]);
+} else {
+    echo 'not allowed';
+    LogToFile('not allowed');
+}

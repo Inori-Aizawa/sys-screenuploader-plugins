@@ -1,0 +1,5 @@
+config.php
+pictures/**
+!pictures/index.php
+log.log
+game_id.json
