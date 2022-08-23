@@ -1,6 +1,6 @@
 <?php
 /**
- * Sample plugin for the plugin system
+ * Sample plugin for the plugin system.
  *
  * @author:  Martin Lantzsch <martin@linux-doku.de>
  * @website: http://linux-doku.de
@@ -8,18 +8,16 @@
  * @version: 0.1
  */
 
-include 'config.php';
-
 class LocalPlugin
 {
+    public function execute($file)
+    {
+        include 'config.php';
+        $path = 'pictures/'.getTitleFromName($_REQUEST['filename']).'/'; // get the folder path
 
-	public function execute($file)
-	{
-		$path = "pictures/" . getTitleFromName($_REQUEST['filename']) . '/'; // get the folder path
-
-		if (!file_put_contents($path . $_REQUEST['filename'], $file)) { // if the directory does not exsit create it and try again
-			mkdir($path);
-			file_put_contents($path . $_REQUEST['filename'], $file);
-		}
-	}
+        if (!file_put_contents($path.$_REQUEST['filename'], $file)) { // if the directory does not exsit create it and try again
+            mkdir($path);
+            file_put_contents($path.$_REQUEST['filename'], $file);
+        }
+    }
 }
