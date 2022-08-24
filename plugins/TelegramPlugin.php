@@ -11,7 +11,7 @@ class TelegramPlugin
 {
     public function execute($file)
     {
-		include 'config.php';
+        include 'config.php';
         $path = 'tmp/';
         // LogToFile('Sending to telegram');
         if (!file_put_contents($path.$_REQUEST['filename'], $file)) {
