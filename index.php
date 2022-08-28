@@ -1,7 +1,4 @@
 <?php
-
-// load system
-
 set_include_path('/');
 include 'plugins.class.php';
 // start system
@@ -9,7 +6,7 @@ plugins::start('plugins/');
 include 'config.php';
 include 'common.php';
 include 'logging.php';
-$path = $folder.getTitleFromName($_REQUEST['filename']).'/'; // get the folder path
+$path = getTitleFromName($_REQUEST['filename']).'/'; // get the folder path
 
 $ext = strtolower(pathinfo($path.$_REQUEST['filename'], PATHINFO_EXTENSION)); // get the extension of the file
 
