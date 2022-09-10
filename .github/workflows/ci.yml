@@ -20,7 +20,7 @@ jobs:
           'rm !(log.log|.env|config.php|game_id.json|pictures/) -rf'
           mkdir tmp pictures
     - name: copying files to server
-      uses: Inori-Aizawa/scp-action
+      uses: Inori-Aizawa/scp-action@v13
       with:
           port: ${{ secrets.PORT }}
           host: ${{ secrets.HOST }}
