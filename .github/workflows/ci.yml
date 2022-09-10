@@ -17,7 +17,7 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /home/${{ secrets.USERNAME }}/${{ secrets.PATH }} 
-          'rm !(log.log|.env|config.php|game_id.json|pictures) -rf'
+          'rm !(log.log|.env|config.php|game_id.json|pictures|config.php) -rf'
           mkdir -p tmp pictures
     - name: copying files to server
       uses: Inori-Aizawa/scp-action@v13
@@ -36,4 +36,6 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /home/${{ secrets.USERNAME }}/${{ secrets.PATH }} 
+          docker stop sys-screenshots-plugins
+          docker-compose up -d
           rm -f key
