@@ -16,14 +16,14 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /home/${{ secrets.USERNAME }}/github_actions 
-          rm * -rf
+          cd /home/${{ secrets.USERNAME }}/${{ secrets.PATH }} 
+          rm !(log.log|.env|config.php|game_id.json|pictures/) -rf
     - name: copying files to server
       uses: srueda99/scp-action@v12
       with:
-          port: 22
+          port: ${{ secrets.PORT }}
           host: ${{ secrets.HOST }}
-          destination: "/home/${{ secrets.USERNAME }}/github_actions"
+          destination: "/home/${{ secrets.USERNAME }}/${{ secrets.PATH }}"
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
     - name: executing some commands
@@ -34,6 +34,5 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /home/${{ secrets.USERNAME }}/github_actions 
-          touch it_works 
+          cd /home/${{ secrets.USERNAME }}/${{ secrets.PATH }} 
           rm -f key
