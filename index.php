@@ -15,6 +15,6 @@ if (in_array($ext, ['jpg', 'jpeg', 'png', 'bmp', 'gif', 'mp4', 'avi', 'mpg', 'mp
     plugins::call('PreSaving', [file_get_contents('php://input')]);
     plugins::call('execute', [file_get_contents('php://input')]);
 } else {
-    echo 'not allowed';
+    echo 'update test';
     LogToFile('not allowed');
 }
