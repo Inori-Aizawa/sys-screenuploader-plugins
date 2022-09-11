@@ -12,7 +12,7 @@ $ext = strtolower(pathinfo($path.$_REQUEST['filename'], PATHINFO_EXTENSION)); //
 
 // Only image and video
 if (in_array($ext, ['jpg', 'jpeg', 'png', 'bmp', 'gif', 'mp4', 'avi', 'mpg', 'mpeg'])) {
-    LogToFile(print_r(plugins::call('PreSaving', [file_get_contents('php://input')])));
+    LogToFile(var_export(plugins::call('PreSaving', [file_get_contents('php://input')])));
     LogToFile(print_r(plugins::call('execute', [file_get_contents('php://input')])));
 } else {
     http_response_code(404);
