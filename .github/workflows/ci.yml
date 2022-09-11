@@ -36,6 +36,6 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /home/${{ secrets.USERNAME }}/${{ secrets.PATH }} 
-          docker stop sys-screenshots-plugins
-          docker-compose up -d
+          docker stop sys-screenshot-plugins
+          docker-compose up -d --build
           rm -f key
