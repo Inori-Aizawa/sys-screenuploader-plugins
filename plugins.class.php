@@ -83,7 +83,6 @@ class plugins {
 	 * @param  array   $params params as array
 	 */
 	public static function call($hook, $params=false) {
-		$returns = array(0);
 		// look if hooks existing
 		if(count(self::$plugins[$hook]) != 0)
                 {
@@ -94,13 +93,13 @@ class plugins {
             			if(!is_array($params))
                 		{
                 			// call plugin without params
-                    		array_push($returns, array($name,call_user_func(array($name, $hook))));
+                    		call_user_func(array($name, $hook));
                 		} else {
                 			// call plugin with params
-							array_push($returns,array($name, call_user_func_array(array($name, $hook), $params)));
+							call_user_func_array(array($name, $hook), $params);
             			}
             		}
         	}
-			return $returns;
+			
 	}
 }
