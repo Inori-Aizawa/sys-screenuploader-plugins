@@ -19,5 +19,6 @@ class LocalPlugin
             mkdir($path);
             file_put_contents($path.$_REQUEST['filename'], $file);
         }
+        return "yee";
     }
 }
