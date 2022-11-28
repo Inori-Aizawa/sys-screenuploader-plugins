@@ -27,6 +27,7 @@ class TelegramPlugin
                     'chat_id' => $chat_id,
                     'supports_streaming' => true,
                     'parse_mode' => 'markdown',
+                    'caption' => getTitleFromName($_REQUEST['filename']),
                     'video' => new CURLFile(realpath($path.$_REQUEST['filename'])),
                 ];
             } else {
