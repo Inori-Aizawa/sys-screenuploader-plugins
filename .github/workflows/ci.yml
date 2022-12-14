@@ -1,41 +1,20 @@
-name: deployment
-on: [push]
+name: Build Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+# Required for secrets.GITHUB_TOKEN
+permissions:
+  packages: write
+  contents: read
 
 jobs:
-  deploy:
-    name: Build
+  docker:
     runs-on: ubuntu-latest
     steps:
-    - name: checkout
-      uses: actions/checkout@v1
-    - name: removing old files from server
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.KEY }}
-        port: ${{ secrets.PORT }}
-        script: |
-          cd /home/${{ secrets.USERNAME }}/${{ secrets.PATH }} 
-          "rm !(log.log|.env|config.php|game_id.json|pictures|config.php) -rf"
-          mkdir -p tmp pictures
-    - name: copying files to server
-      uses: Inori-Aizawa/scp-action@v13
-      with:
-          port: ${{ secrets.PORT }}
-          host: ${{ secrets.HOST }}
-          destination: "/home/${{ secrets.USERNAME }}/${{ secrets.PATH }}"
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-    - name: executing some commands
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.KEY }}
-        port: ${{ secrets.PORT }}
-        script: |
-          cd /home/${{ secrets.USERNAME }}/${{ secrets.PATH }} 
-          docker stop sys-screenshot-plugins
-          docker-compose up -d --build
-          rm -f key
+      - name: GHCR-Action
+        uses: KuhlTime/ghcr-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
